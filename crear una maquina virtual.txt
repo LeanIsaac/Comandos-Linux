@@ -1,0 +1,21 @@
+Abrimos virtual box
+
+1. vamos a nueva
+2. Tipo: seleccionamos Linux
+3. seleccionamos el tamaño de la memoria (yo le puse 4000 MB)
+4. Disco Duro: usar un archivo de disco duro virtual existente, seleccionamos la carpeta inferior a la derecha
+5. Arriba a la izquierda, Vamos a añadir, y buscamos la imagen iso
+
+SEGUNDO PASO
+
+6.Despues vamos a configuración
+7. Almacenamiento
+8. seleccionamos donde se intalo nuestra imagen ISO.(controlador: SATA)
+9. agregar un disco duro (el disco duro con el simbolo de mas (+))
+10. despues, en Crear.
+11. Tipo de archivo de disco duro: 
+	VDI (VirtualBox Disk Image) <---- SI
+	VHD (Virtual Hard Disk)     X
+	VMDK (Virtual Machine Disk) X
+12. Despues seleccionamos: Reservado dinámicamente.
+13. Elegimos el tamaño (yo 4GB).

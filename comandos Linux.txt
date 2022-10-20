@@ -1,0 +1,124 @@
+Disco Rigido***
+*lsblk --> lista los discos rigidos
+*cd /dev/ --> entramos al apartado device
+*ls -ltah --> lsitamos los archivos que contiene
+
+crear particion***
+*sudo fdisk /dev/sdb --> crear particion
+
+Formatear*****
+*sudo mkfs /dev/sdb1 --> construir una estructura del archivo de *sistemas (Hacer un sistema de archivo)  (FORMATEAR)
+
+Montar un disco****
+*mkdir disco2 --> (Creo una carpeta para montar el disco)
+*sudo mount /dev/sdb1 disco2 --> monto la particion del disco 				'sdb1' a la carpeta "disco2"
+----------------------------------------------------------------
+**** 'e'- disco extendido es un puntero a todas las logicas****
+----------------------------------------------------------------
+
+
+
+---------- Crear particion para un disco ------------
+lsblk --> para listar de los discos
+sudo (superUsuario)
+sudo fdisk /dev/sd'c' --> acceso al disco sdc (en este caso)
+n --> (para crear particiones)
+enter (default) hasta crear las particiones
+w --> (write) para escribir/guardar las particiones en el disco
+
+sudo mkfs /dev/sd'c1' --> formateo
+
+***** Para montar el disco en una carpeta *****
+creamos una carpeta (mkdir discoDuro) en el home, o donde sea.
+sudo mount /dev/sdc1 discoDuro --> monta el disco duro a la carpeta discoDuro
+
+------------- Partion de tipo primaria -----------
+sudo fdisk /dev/"disco"
+n (añadir nueva particion)
+p (particion de tipo primaria) (default tambien es primario)
+Partion number ENTER (Default)
+First sector ENTER (Default)
+Last sector +1G (crea una particion con el tamaño de 1GB)
+w (Guardar)
+
+-------------------------
+d --> delete a partition
+-------------------------
+
+------ Partition de tipo Extendida----------------
+sudo fdisk /dev/"disco"
+n (añadir nueva particion)
+e (particion de tipo extendida)
+Partion number ENTER (Default)
+First sector ENTER (Default)
+Last sector ENTER (Default)
+w (Guardar)
+
+-------- Partion Logica ---------------------
+sudo fdisk /dev/"disco"
+n (añadir nueva particion)
+ENTER (Default)
+Partion number ENTER (Default)
+First sector ENTER (Default)
+Last sector ENTER (ESPACIO A SELECCIONAR)
+w (Guardar)
+-----------------------------------------------------------
+- COMANDOS LINUX -
+*echo >comandos.txt --> para crear un archivo
+*mkdir "nombre" --> para crear subdirectorios
+*history >historial.txt --> para crear un archivo con todos los 		comandos que usamos hasta el momento en la consola.
+*rmdir "carpeta" --> para borrar un subdirectorio
+
+- DISCO RIGIDO - PARTICIONES - APUNTES -
+solo podemos crear 4 particiones de tipo primaria
+si queremos crear mas de 4, la terecera la debemos hacer extendida, para que las demas las podamos crear de manera logica.
+
+-------------------------------------------------------------
+LVM : Manejo de volumen dinamico
+/dev : directorio volatil, existe segun el HardWare que tengamos
+/etc : Archivos de configuración utilizados en todo el sistema y que son específicos del ordenador
+/home : contiene los home de cada usuario, es dinamico
+/lib : librerias /lib64 para arquitecturas de 64bits
+/media : Puntos de montaje para dispositivos de medios como unidades lectoras de discos compactos.
+/mnt : punto de montaje temporal, ya no se usa mucho
+/opt : subdirectorio, va archivos de solo lectura que no guarda /usr
+/proc : totalmente dinamico, depende de lo que corre el s.o en ese momento
+/root: home del root del superusuario
+/sbin: del s.o propio
+/srv : datos del servidor
+/sys : igual que /proc indica que pasa en mi computadora y que recursos estoy utilanzo
+/tmp : archivos temporales,(ej, como papelera) mantiene info temporal dinamica y publica.
+/usr : user system resources, almacena los archivos del usuario de solo lectura
+/var : para tener la gestion y el contro de nuestro s.o, como un registro de lo que va pasando.
+
+● Estáticos: /bin, /sbin, /opt, /boot, /usr/bin (no se puede modificar)
+● Dinámicos: /var/mail, /var/spool, /var/run, /var/lock, /home
+● Compartidos: /usr/bin, /opt (cualquiera puede ingresar)
+● No compartidos: /etc, /boot, /var/run, /var/lock
+
+archivos directorios (subdirectorios) : tiene punteros a otros subdirectorios, puede tener archivos comunes
+archivo comunes : 
+archivos especiales : la mayoria los encontramos en /dev, mantiene los punteros a todo el hardware de nuestra pc
+
+nombre de archivos: es casesensitive (distingue entre mayus y min)
+
+inodo es un bloque que almacena informacion de los archivos
+ln -s archivo.txt nuevo_nombre.txt (enlace de referencia, lo que cambie en uno cambia en otro)
+
+puntos de montaje: 
+
+particion extendida, no cuenta como una particion, es como un casillero que contiene las referencias a las las particiones logicas.
+
+-----------------------------------------------------------------
+rm -r "nacion" --> borra un directorio entero, con sus subdirectorios
+mkdir -p --> para crear varios subdirectorios en un comando ("{1,2}"se crean al mismo nivel, para crear mas de un subdirectorio), con "/" creamos dentro del subdirectorio	  
+
+lsblk > "nombre.txt" --> guarda el listado en un archivo .txt
+
+lsblk > "desarrollo/fuentes/discos.txt" (//podemos agregar una ruta)
+
+cat "nombre.txt" para leer el archivo en consola
+
+uname -a "Vemos toda la informacion de nuestro sistema Operativo"  
+man uname -->para ver que tipo de informafacion podemos filtrar de nuestro S.O
+tambien podemos guardarlo en una ruta/path.
