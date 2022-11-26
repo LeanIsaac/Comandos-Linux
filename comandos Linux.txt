@@ -1,38 +1,36 @@
 Disco Rigido***
-*lsblk --> lista los discos rigidos
-*cd /dev/ --> entramos al apartado device
-*ls -ltah --> lsitamos los archivos que contiene
+*lsblk ---> lista los discos rigidos
+*cd /dev/ ---> entramos al apartado device
+*ls -ltah ---> lsitamos los archivos que contiene
 
 crear particion***
-*sudo fdisk /dev/sdb --> crear particion
+*sudo fdisk /dev/sdb ---> crear particion
 
 Formatear*****
-*sudo mkfs /dev/sdb1 --> construir una estructura del archivo de *sistemas (Hacer un sistema de archivo)  (FORMATEAR)
+*sudo mkfs /dev/sdb1 ---> construir una estructura del archivo de *sistemas (Hacer un sistema de archivo)  (FORMATEAR)
 
 Montar un disco****
-*mkdir disco2 --> (Creo una carpeta para montar el disco)
-*sudo mount /dev/sdb1 disco2 --> monto la particion del disco 				'sdb1' a la carpeta "disco2"
-----------------------------------------------------------------
+*mkdir disco2 ---> (Creo una carpeta para montar el disco)
+*sudo mount /dev/sdb1 disco2 ---> monto la particion del disco 				'sdb1' a la carpeta "disco2"
+---------------------------------------------------------------------------------------------
 **** 'e'- disco extendido es un puntero a todas las logicas****
-----------------------------------------------------------------
+---------------------------------------------------------------------------------------------
 
-
-
----------- Crear particion para un disco ------------
-lsblk --> para listar de los discos
+------------------------------------------------- Crear particion para un disco --------------
+lsblk ---> para listar de los discos
 sudo (superUsuario)
-sudo fdisk /dev/sd'c' --> acceso al disco sdc (en este caso)
-n --> (para crear particiones)
+sudo fdisk /dev/sd'c' ---> acceso al disco sdc (en este caso)
+n ---> (para crear particiones)
 enter (default) hasta crear las particiones
-w --> (write) para escribir/guardar las particiones en el disco
+w ---> (write) para escribir/guardar las particiones en el disco
 
-sudo mkfs /dev/sd'c1' --> formateo
+sudo mkfs /dev/sd'c1' ---> formateo
 
 ***** Para montar el disco en una carpeta *****
 creamos una carpeta (mkdir discoDuro) en el home, o donde sea.
-sudo mount /dev/sdc1 discoDuro --> monta el disco duro a la carpeta discoDuro
+sudo mount /dev/sdc1 discoDuro ---> monta el disco duro a la carpeta discoDuro
 
-------------- Partion de tipo primaria -----------
+---------------------------------------------- Partion de tipo primaria -----------------------
 sudo fdisk /dev/"disco"
 n (añadir nueva particion)
 p (particion de tipo primaria) (default tambien es primario)
@@ -41,11 +39,11 @@ First sector ENTER (Default)
 Last sector +1G (crea una particion con el tamaño de 1GB)
 w (Guardar)
 
--------------------------
+---------------------------------------
 d --> delete a partition
--------------------------
+---------------------------------------
 
------- Partition de tipo Extendida----------------
+---------------------------------------- Partition de tipo Extendida----------------
 sudo fdisk /dev/"disco"
 n (añadir nueva particion)
 e (particion de tipo extendida)
@@ -54,7 +52,7 @@ First sector ENTER (Default)
 Last sector ENTER (Default)
 w (Guardar)
 
--------- Partion Logica ---------------------
+-------------------------------------------- Partion Logica ----------------------
 sudo fdisk /dev/"disco"
 n (añadir nueva particion)
 ENTER (Default)
@@ -62,7 +60,7 @@ Partion number ENTER (Default)
 First sector ENTER (Default)
 Last sector ENTER (ESPACIO A SELECCIONAR)
 w (Guardar)
------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
 - COMANDOS LINUX -
 *echo >comandos.txt --> para crear un archivo
 *mkdir "nombre" --> para crear subdirectorios
@@ -73,7 +71,7 @@ w (Guardar)
 solo podemos crear 4 particiones de tipo primaria
 si queremos crear mas de 4, la terecera la debemos hacer extendida, para que las demas las podamos crear de manera logica.
 
--------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
 LVM : Manejo de volumen dinamico
 /dev : directorio volatil, existe segun el HardWare que tengamos
 /etc : Archivos de configuración utilizados en todo el sistema y que son específicos del ordenador
@@ -109,16 +107,182 @@ puntos de montaje:
 
 particion extendida, no cuenta como una particion, es como un casillero que contiene las referencias a las las particiones logicas.
 
------------------------------------------------------------------
-rm -r "nacion" --> borra un directorio entero, con sus subdirectorios
-mkdir -p --> para crear varios subdirectorios en un comando ("{1,2}"se crean al mismo nivel, para crear mas de un subdirectorio), con "/" creamos dentro del subdirectorio	  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+rm -r "nacion" ---> borra un directorio entero, con sus subdirectorios
+mkdir -p ---> para crear varios subdirectorios en un comando ("{1,2}"se crean al mismo nivel, para crear mas de un subdirectorio), con "/" creamos dentro del subdirectorio	  
 
-lsblk > "nombre.txt" --> guarda el listado en un archivo .txt
+lsblk > "nombre.txt" ---> guarda el listado en un archivo .txt
 
 lsblk > "desarrollo/fuentes/discos.txt" (//podemos agregar una ruta)
 
 cat "nombre.txt" para leer el archivo en consola
 
 uname -a "Vemos toda la informacion de nuestro sistema Operativo"  
-man uname -->para ver que tipo de informafacion podemos filtrar de nuestro S.O
+man uname ---> para ver que tipo de informafacion podemos filtrar de nuestro S.O
 tambien podemos guardarlo en una ruta/path.
+pwd ---> para saber donde estoy parado(ruta/directorio) 
+
+*****************************************************************************************
+------------------------- Permisos y Usuarios -------------------------------------------
+*****************************************************************************************
+El numero representa que permiso quiero sobre ese archivo
+
+propietario - grupo - resto de usuarios
+ej. (6)         (4)	    (4)
+
+permiso 6 (110 bin) --> permiso de lwctura escritura (rw-)
+permiso 4 (100 bin) --> solo lectura (r--)
+
+644 = -rw- r-- r-- permiso donde el dueño puede leer y escribir y el resto del mundo puede solo leer.
+
+Permiso 7 4 0 --> (7) el dueño puede hacer lo que quiera , (4) solo leer, (0) el resto del mundo no lo ve
+
+7 7 7 -> es como transformarlo en windows.
+6 6 6 me permite leer y escribir en todos (chmod 666)
+
+chmod - (quitar permiso) / + (da permisos)
+
+* r - permiso de lectura
+* w - permiso de escritura
+* x - permiso de ejecución
+* X - permiso de ejecucion (sólo aplica a directorios) 
+
+chmod 764 <archivo.txt> <--> (rwx) - (rw-) - (r--) 
+
+-----------------------------------------------------------------------------------
+******* Crear Usuario / administracion de usuarios *****
+-----------------------------------------------------------------------------------
+cada usuario puede tener mas de un grupo.
+si trabajas con servidores, podes liberar recursos bloqueando usuarios
+
+adduser <nombre>
+passwd <usuario> creamos el password del usuario
+
+para borrar un usruario completamente:--> userdel -r <usuario>
+
+sudo su/ super usuario hace / usuario root 
+
+-----------------------------------------------------------------------------------
+*********** Grupos **************
+----------------------------------------------------------------------------------
+son una manera de organizar los grupos principalmente como una manera de seguridad
+las personas pueden estar en mas de un grupo, cuando se crea un usuario se crea un grupo automaticamente con ese usuario, no tiene que aparecer en el archivo etc/group
+
+ls -s -> permisos de los grupos
+puedo defirle permisos a los grupos
+# sudo groupadd "nombre" --> crea un grupo
+
+-----------------------------------------------------------------------------------
+grep -> permite filtrar
+
+chmod +x "nombre.extension" --> cambio el permiso, x (archivo ejecutable)
+./"nombre.extencion" --> abro el ejecutable
+
+grep --> hace una busqueda de ese texto dentro de etc/passwd
+sudoer -> guarda quienes son super usuario??
+
+etc/shadow --> archivo donde se guarda el password (shadow encriptado)
+
+sudoers --> es el archivo que guarda quienes son sudo de los usuarios
+
+*********************************************************************************
+mkdir midir
+sudo useradd "nombre" -> creo un usuario
+ls -l -> listar
+sudo chmod 740 midir (cambio el tipo modo/permiso)
+sudo chgrp usuarios midir (cambio el grupo) --> si no tiene grupo lo crea
+sudo chown nodoby midir -> (cambio el usuario)
+passwd -> cambio la ontraseña de el usuario
+
+************************************************************* LVM *******************************************************************************
+
+pv desarmar partes dinamicas - creo partes flotando
+grupo = a un nuevo disco rigido -- vg combina varios pv
+lv = omonimo de fdisk -> permite crear partciones que si podemos utilizar
+
+# sudo fdisk -l /dev/sd'x'  ---> vemos las capacidades y si contiene o no particion
+
+# sudo pvcreate /dev/sd'x1' /dev/sd'x2' /dev/sd'y1' /dev/sd'y2' --> creacion del Physical Volumes
+Para ver la información de los Physical Volumens tenemos dos comandos ---> ( pvs y pvdisplay )
+
+Volume Groups (VG – vgcreate) --> creamos grupos.
+# sudo vgcreate vg01 /dev/sd'x1' --> primer grupo
+# sudo vgcreate vg02 /dev/sd'y1' --> otro grupo
+Para ver la información de los Volume Groups tenemos dos comandos ---> ( vgs y vgdisplay )
+
+Logical Volume (LV – lvcreate)--> estaremos creando las particiones lógicas. (va contenido en los grupos)
+# sudo lvcreate -L +'10MB' -n 'lvwww' vg01 (-n == name lv)
+( create un volumen logico de tamaño 10MB de nombre lvwww sobre el vg01 (volumen group 1))
+(-L mayuscula de tamaño logico/ -l minuscula de logical extend)
+
+# sudo lvcreate -L +'10MB' -l +100%FREE -n 'lvdb' vg02 --> (para utilizar el 100% del espacio en vg02, utilizamos la opción -l +100%FREE.)
+
+Para observar como quedo, vamos a ejecutar varios comandos, pvs, vgs y lvs.
+#sudo (pvs) / (vgs) / (lvs)
+
+Ahora pasamos a formatear las particiones lógicas creadas en ext4.
+#sudo mkfs.ext4 /dev/vg01/'lvwww'
+#sudo mkfs.ext4 /dev/vg02/'lvdb'
+
+Realizamos los puntos de montajes.
+• /www contrendra lvwww
+• /db contendra lvdb
+
+# mkdir /www /db
+# sudo mount /dev/vg01/'lvwww' /www  
+
+Verificamos los espacios, con el comando df opción -h.
+
+Para expandir el espacio del vg'02' con el disco sd'x2' ( vgextend )
+# sudo vgextend vg01 /dev/sdx2
+# sudo vgs --> para ver como quedo
+
+Podemos expandir ahora el lvwww o bien crear otro lv
+#sudo lvextend -L +20MB /dev/vg01/lvwww
+#sudo lvs
+
+# sudo resize2fs /dev/vg01/lvwww --> primero ejecutar programa, despues...
+# sudo df -h
+----------------------->>> crear usuarios <<<---------------------------------
+
+#sudo useradd -m -s /bin/bash -c “Usuario de prueba” -g users prueba
+
+------------------------------------------------------------------------------
+-m creacion del directorio
+------------------------------------------------------------------------------
+-s Le indicamos el shell que va a utilizar
+------------------------------------------------------------------------------
+-c comentario del usuario
+------------------------------------------------------------------------------
+-g group principal
+------------------------------------------------------------------------------
+
+para ver los contenidos, o si se crearon grupos, etc
+----------------------------------------------------------- 
+|# sudo grep prueba /etc/passwd |o| sudo more /etc/passwd |
+|---------------------------------------------------------|
+|# sudo grep prueba /etc/shadow |o| sudo more /etc/shadow |
+|---------------------------------------------------------|
+|# sudo grep prueba /etc/group  |o| sudo more /etc/group  |
+|---------------------------------------------------------|
+
+# sudo useradd -m -s /bin/bash -c “Usuario de prueba 2” -g users -G users,nogroup prueba2
+
+---------------------------------------------------------
+|-G 		Grupos adicionales			|
+---------------------------------------------------------
+
+------ Agregar el grupo con al usuario prueba2 ----------
+# sudo usermod -G con -a prueba2
+	
+---------------------------------------------------------
+|-a     Agrega el grupo con, sin borrar los que tiene.	|
+---------------------------------------------------------
+# grep ‘con’ /etc/group
+# groupdel con --> borra el grupo
+
+
+CREO UN USUARIO
+# sudo useradd -m -s /bin/bash -g users -G users recu //(recu== nombre del usuario)
+para ver el grupo --> sudo grep "nombre del user" /etc/group
+# sudo usermod usuario -g "nombre del grupo" <---- para agregarle un grupo a un usuario.
